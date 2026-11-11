@@ -1,0 +1,27 @@
+{
+  "dataset": "UCI SECOM (Semiconductor Manufacturing Process)",
+  "uci_id": 179,
+  "landing_page": "https://archive.ics.uci.edu/dataset/179/secom",
+  "download_url": "https://archive.ics.uci.edu/static/public/179/secom.zip",
+  "api_metadata_url": "https://archive.ics.uci.edu/api/dataset?id=179",
+  "api_metadata_status": "saved",
+  "retrieved_at_utc": "2026-11-11T13:58:29.646438+00:00",
+  "files": {
+    "secom.zip": {
+      "size_bytes": 1964989,
+      "sha256": "eea568baf3c2229096d7d294cf0b096b5502bd96d92c0b80a65b84714059be8e"
+    },
+    "secom.data": {
+      "size_bytes": 5389983,
+      "sha256": "20f0e7ee434f7dcbae0eea9ffff009a2b57f42d6b0dc9a5bd4f00782c0a3374c"
+    },
+    "secom.names": {
+      "size_bytes": 4223,
+      "sha256": "6d91b0b46cdee03064ee3e3112f937c1b3f7fcd9933575794ec07974e6f1ea59"
+    },
+    "secom_labels.data": {
+      "size_bytes": 40638,
+      "sha256": "126884cf453705c9e61a903fe906f0665a3b45ce3639e621edc5c93c89627e03"
+    }
+  }
+}

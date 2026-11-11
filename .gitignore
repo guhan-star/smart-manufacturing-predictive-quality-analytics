@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# Data (keep raw data reproducible via download script, or track small metadata)
+data/raw/*.zip
+data/raw/*.data
+data/raw/*.names
+data/processed/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
