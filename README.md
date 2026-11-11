@@ -21,7 +21,7 @@ All four project phases are complete:
 ├── data/
 │   ├── raw/                               # Official UCI SECOM files (preserved unmodified)
 │   └── processed/                         # Phase 2 cleaned dataset & cleaning summary
-├── docs/                                  # Phase 1 dictionary, audit & Phase 3 plan
+├── docs/                                  # Phase 1 dictionary, audit, academic report, slides & viva guide
 ├── models/                                # Saved Phase 3 pipelines & metadata
 ├── notebooks/
 │   └── 02_data_preparation_and_eda.ipynb  # Executed Phase 2 preparation & EDA notebook

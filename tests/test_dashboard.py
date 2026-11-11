@@ -17,26 +17,29 @@ from secom_project.inference import (
 )
 
 
-def test_dashboard_inference_valid_and_target_stripping() -> None:
+def test_dashboard_inference_valid_multi_record_shuffled_and_target_stripping() -> None:
     model, meta = load_selected_model_and_metadata(MODELS_DIR)
-    sample_bytes = build_sample_sensor_csv_bytes(n_rows=5)
+    sample_bytes = build_sample_sensor_csv_bytes(n_rows=25)
     sample_df = pd.read_csv(io.BytesIO(sample_bytes))
+    assert sample_df.isna().sum().sum() > 0, "Sample raw rows should contain realistic NaNs for imputation"
 
-    preds_clean, warns_clean = validate_and_predict_dataframe(
-        sample_df, model, threshold=float(meta["selected_threshold"])
-    )
-    assert len(preds_clean) == 5
+    threshold = float(meta["selected_threshold"])
+    preds_clean, warns_clean = validate_and_predict_dataframe(sample_df, model, threshold=threshold)
+    assert len(preds_clean) == 25
     assert warns_clean == []
     assert np.all((preds_clean["fail_probability"] >= 0.0) & (preds_clean["fail_probability"] <= 1.0))
     assert set(preds_clean["predicted_label"]).issubset({-1, 1})
+
+    # Reversed / shuffled column ordering must produce identical predictions
+    reversed_df = sample_df[list(reversed(sample_df.columns))].copy()
+    preds_rev, _ = validate_and_predict_dataframe(reversed_df, model, threshold=threshold)
+    pd.testing.assert_frame_equal(preds_clean, preds_rev)
 
     # Adding target_label / timestamp must be stripped and yield identical predictions
     df_with_meta = sample_df.copy()
     df_with_meta["target_label"] = 1
     df_with_meta["timestamp"] = "2008-10-15 12:00:00"
-    preds_meta, warns_meta = validate_and_predict_dataframe(
-        df_with_meta, model, threshold=float(meta["selected_threshold"])
-    )
+    preds_meta, warns_meta = validate_and_predict_dataframe(df_with_meta, model, threshold=threshold)
     assert len(warns_meta) == 1
     pd.testing.assert_frame_equal(preds_clean, preds_meta)
 

@@ -205,7 +205,7 @@ def render_eda(
                 title="Top 20 Sensor Features by Missingness (%)",
                 labels={"missing_pct": "Missing (%)", "feature": "Sensor", "cleaning_action": "Phase 2 Action"},
             )
-            fig_miss.add_vline(x=50.0, line_dash="dash", line_color="black", annotation_text="50% Cutoff")
+            fig_miss.add_vline(x=50.0, line_dash="dash", line_color="#f59e0b", annotation_text="50% Cutoff")
             fig_miss.update_layout(height=360, margin=dict(t=45, b=20, l=20, r=20), legend=dict(orientation="h", y=-0.22))
             st.plotly_chart(fig_miss, width="stretch")
         else:
@@ -270,6 +270,11 @@ def render_model_comparison(
         k3.metric("Held-Out Test PR-AUC", f"{test_metrics['pr_auc']:.4f}", "Base rate: 0.0613")
         k4.metric("Held-Out Test ROC-AUC", f"{test_metrics['roc_auc']:.4f}")
         k5.metric("Held-Out Fail Recall / F1", f"{test_metrics['fail_recall']:.4f}", f"F1: {test_metrics['fail_f1']:.4f}")
+        st.info(
+            "**Scientific Integrity Note:** `HistGradientBoosting` was selected solely on Validation PR-AUC (`0.2080`, `33.3%` recall at `t* = 0.19`). "
+            "On the untouched October test set (`n=359`, `22` fails), ranking stayed above the `0.0613` base rate (`PR-AUC = 0.0828`, `ROC-AUC = 0.5968`), "
+            "but temporal distribution shift pushed predicted scores below `t* = 0.19`, yielding `0 / 22` flagged detections (`TP = 0, FP = 13`)."
+        )
 
     tab_val, tab_test = st.tabs(["Chronological Validation Metrics (Sep 2008, n=483)", "Held-Out Test Metrics (Oct 2008, n=359)"])
     with tab_val:
@@ -348,7 +353,10 @@ def render_interactive_prediction(model: object | None, model_meta: dict | None,
         return
 
     try:
-        raw_df = pd.read_csv(uploaded)
+        try:
+            raw_df = pd.read_csv(uploaded)
+        except pd.errors.EmptyDataError as exc:
+            raise ValueError("Uploaded CSV file is empty (no header or sensor columns).") from exc
         pred_df, warn_msgs = validate_and_predict_dataframe(raw_df, model, threshold=threshold)
         for msg in warn_msgs:
             st.info(msg)
@@ -373,7 +381,7 @@ def render_interactive_prediction(model: object | None, model_meta: dict | None,
             labels={"fail_probability": "Predicted P(Fail)", "predicted_outcome": "Classification"},
             color_discrete_map={"Pass (-1)": "#0284c7", "Fail (1)": "#dc2626"},
         )
-        fig_p.add_vline(x=threshold, line_dash="dash", line_color="black", annotation_text=f"t* = {threshold:.2f}")
+        fig_p.add_vline(x=threshold, line_dash="dash", line_color="#f59e0b", annotation_text=f"t* = {threshold:.2f}")
         fig_p.update_layout(height=320, margin=dict(t=45, b=20, l=20, r=20))
         st.plotly_chart(fig_p, width="stretch")
 
