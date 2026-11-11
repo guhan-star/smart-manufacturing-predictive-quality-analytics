@@ -1,0 +1,153 @@
+{
+  "statistical_summary_csv": "E:\\anti gravity\\DSE\\reports\\phase2_statistical_summary.csv",
+  "statistical_analysis_md": "E:\\anti gravity\\DSE\\reports\\phase2_statistical_analysis.md",
+  "figures_generated": [
+    "E:\\anti gravity\\DSE\\reports\\figures\\class_distribution.png",
+    "E:\\anti gravity\\DSE\\reports\\figures\\missing_values.png",
+    "E:\\anti gravity\\DSE\\reports\\figures\\missing_percentage.png",
+    "E:\\anti gravity\\DSE\\reports\\figures\\sensor_distributions.png",
+    "E:\\anti gravity\\DSE\\reports\\figures\\pass_fail_boxplots.png",
+    "E:\\anti gravity\\DSE\\reports\\figures\\correlation_heatmap.png",
+    "E:\\anti gravity\\DSE\\reports\\figures\\feature_variability.png",
+    "E:\\anti gravity\\DSE\\reports\\figures\\pass_fail_sensor_comparison.png"
+  ],
+  "skew_gt_2_count": 245,
+  "skew_gt_10_count": 111,
+  "cv_gt_1_count": 122,
+  "correlation_summary": {
+    "total_unique_sensor_pairs": 96580,
+    "pearson_pairs_abs_ge_0_99": 112,
+    "pearson_pairs_abs_ge_0_95": 257,
+    "pearson_pairs_abs_ge_0_90": 332,
+    "pearson_pairs_abs_ge_0_80": 565,
+    "spearman_pairs_abs_ge_0_90": 281,
+    "spearman_pairs_abs_ge_0_80": 353,
+    "top_correlated_pairs": [
+      {
+        "feature_a": "sensor_034",
+        "feature_b": "sensor_036",
+        "pearson_r": -1.0
+      },
+      {
+        "feature_a": "sensor_140",
+        "feature_b": "sensor_275",
+        "pearson_r": 1.0
+      },
+      {
+        "feature_a": "sensor_172",
+        "feature_b": "sensor_174",
+        "pearson_r": 1.0
+      },
+      {
+        "feature_a": "sensor_307",
+        "feature_b": "sensor_309",
+        "pearson_r": 0.999999
+      },
+      {
+        "feature_a": "sensor_152",
+        "feature_b": "sensor_287",
+        "pearson_r": 0.999997
+      },
+      {
+        "feature_a": "sensor_252",
+        "feature_b": "sensor_390",
+        "pearson_r": 0.999991
+      },
+      {
+        "feature_a": "sensor_004",
+        "feature_b": "sensor_275",
+        "pearson_r": 0.999976
+      },
+      {
+        "feature_a": "sensor_004",
+        "feature_b": "sensor_140",
+        "pearson_r": 0.999975
+      },
+      {
+        "feature_a": "sensor_251",
+        "feature_b": "sensor_389",
+        "pearson_r": 0.999939
+      },
+      {
+        "feature_a": "sensor_249",
+        "feature_b": "sensor_387",
+        "pearson_r": 0.999938
+      },
+      {
+        "feature_a": "sensor_583",
+        "feature_b": "sensor_585",
+        "pearson_r": 0.99989
+      },
+      {
+        "feature_a": "sensor_176",
+        "feature_b": "sensor_447",
+        "pearson_r": 0.999887
+      },
+      {
+        "feature_a": "sensor_389",
+        "feature_b": "sensor_523",
+        "pearson_r": 0.999857
+      },
+      {
+        "feature_a": "sensor_268",
+        "feature_b": "sensor_540",
+        "pearson_r": 0.999837
+      },
+      {
+        "feature_a": "sensor_251",
+        "feature_b": "sensor_523",
+        "pearson_r": 0.999837
+      },
+      {
+        "feature_a": "sensor_248",
+        "feature_b": "sensor_520",
+        "pearson_r": 0.999732
+      },
+      {
+        "feature_a": "sensor_147",
+        "feature_b": "sensor_282",
+        "pearson_r": 0.999596
+      },
+      {
+        "feature_a": "sensor_177",
+        "feature_b": "sensor_448",
+        "pearson_r": 0.999537
+      },
+      {
+        "feature_a": "sensor_187",
+        "feature_b": "sensor_459",
+        "pearson_r": 0.999528
+      },
+      {
+        "feature_a": "sensor_148",
+        "feature_b": "sensor_283",
+        "pearson_r": 0.999522
+      },
+      {
+        "feature_a": "sensor_175",
+        "feature_b": "sensor_446",
+        "pearson_r": 0.999483
+      },
+      {
+        "feature_a": "sensor_253",
+        "feature_b": "sensor_525",
+        "pearson_r": 0.999362
+      },
+      {
+        "feature_a": "sensor_147",
+        "feature_b": "sensor_420",
+        "pearson_r": 0.999336
+      },
+      {
+        "feature_a": "sensor_195",
+        "feature_b": "sensor_467",
+        "pearson_r": 0.999273
+      },
+      {
+        "feature_a": "sensor_254",
+        "feature_b": "sensor_526",
+        "pearson_r": 0.999256
+      }
+    ]
+  }
+}

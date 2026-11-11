@@ -1,0 +1,591 @@
+feature,missing_count,missing_pct,non_null_count,missing_pct_pass,missing_pct_fail,abs_diff_fail_vs_pass_pct,missingness_tier,is_constant,is_near_constant,cleaning_action,missingness_rank
+sensor_000,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_001,7,0.4467,1560,0.4101,0.9615,0.5514,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_002,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_003,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_004,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_005,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],True,False,Removed (Constant),104
+sensor_006,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_007,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_008,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_009,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_010,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_011,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_012,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_013,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],True,False,Removed (Constant),339
+sensor_014,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_015,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_016,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_017,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_018,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_019,10,0.6382,1557,0.6152,0.9615,0.3464,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),128
+sensor_020,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_021,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_022,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_023,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_024,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_025,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_026,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_027,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_028,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_029,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_030,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_031,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_032,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_033,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_034,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_035,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_036,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_037,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_038,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_039,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_040,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_041,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_042,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_043,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_044,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_045,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_046,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_047,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_048,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_049,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_050,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_051,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_052,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_053,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),315
+sensor_054,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),315
+sensor_055,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),315
+sensor_056,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),315
+sensor_057,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),315
+sensor_058,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),315
+sensor_059,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_060,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_061,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_062,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_063,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_064,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_065,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_066,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_067,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_068,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_069,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_070,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_071,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_072,794,50.6701,773,51.8113,34.6154,17.196,Extreme (>50%),False,False,Removed (High Missingness >50%),25
+sensor_073,794,50.6701,773,51.8113,34.6154,17.196,Extreme (>50%),False,False,Removed (High Missingness >50%),25
+sensor_074,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,True,Removed (Near-Constant >=99%),212
+sensor_075,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_076,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_077,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_078,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_079,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_080,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_081,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_082,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_083,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_084,12,0.7658,1555,0.8202,0.0,0.8202,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),124
+sensor_085,1341,85.5775,226,85.3042,89.4231,4.1189,Extreme (>50%),False,False,Removed (High Missingness >50%),5
+sensor_086,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_087,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_088,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_089,51,3.2546,1516,3.4176,0.9615,2.4561,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),53
+sensor_090,51,3.2546,1516,3.4176,0.9615,2.4561,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),53
+sensor_091,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_092,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_093,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_094,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_095,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_096,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_097,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_098,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_099,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_100,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_101,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_102,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_103,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_104,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_105,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_106,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_107,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_108,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_109,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_110,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_111,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_112,715,45.6286,852,46.6165,31.7308,14.8858,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),29
+sensor_113,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_114,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_115,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_116,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_117,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_118,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_119,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_120,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_121,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_122,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_123,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_124,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_125,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_126,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_127,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_128,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_129,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_130,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_131,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_132,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_133,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_134,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_135,5,0.3191,1562,0.3418,0.0,0.3418,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),312
+sensor_136,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_137,7,0.4467,1560,0.4101,0.9615,0.5514,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_138,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_139,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_140,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_141,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],True,False,Removed (Constant),104
+sensor_142,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_143,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_144,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_145,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_146,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_147,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_148,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_149,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],True,False,Removed (Constant),339
+sensor_150,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_151,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_152,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_153,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_154,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_155,10,0.6382,1557,0.6152,0.9615,0.3464,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),128
+sensor_156,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_157,1429,91.1934,138,91.1141,92.3077,1.1935,Extreme (>50%),False,False,Removed (High Missingness >50%),1
+sensor_158,1429,91.1934,138,91.1141,92.3077,1.1935,Extreme (>50%),False,False,Removed (High Missingness >50%),1
+sensor_159,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_160,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_161,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_162,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_163,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_164,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_165,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_166,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_167,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_168,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_169,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_170,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_171,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_172,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_173,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_174,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_175,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_176,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_177,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_178,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],True,False,Removed (Constant),61
+sensor_179,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_180,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_181,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_182,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_183,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_184,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_185,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_186,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_187,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_188,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_189,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_190,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_191,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_192,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_193,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_194,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_195,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),315
+sensor_196,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_197,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_198,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_199,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_200,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_201,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_202,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_203,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_204,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_205,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_206,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,True,Removed (Near-Constant >=99%),212
+sensor_207,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_208,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_209,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,True,Removed (Near-Constant >=99%),212
+sensor_210,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_211,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_212,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_213,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_214,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_215,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_216,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_217,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_218,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_219,12,0.7658,1555,0.8202,0.0,0.8202,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),124
+sensor_220,1341,85.5775,226,85.3042,89.4231,4.1189,Extreme (>50%),False,False,Removed (High Missingness >50%),5
+sensor_221,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_222,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_223,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_224,51,3.2546,1516,3.4176,0.9615,2.4561,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),53
+sensor_225,51,3.2546,1516,3.4176,0.9615,2.4561,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),53
+sensor_226,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_227,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_228,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_229,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_230,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_231,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_232,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_233,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_234,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_235,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_236,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_237,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_238,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_239,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_240,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_241,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_242,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_243,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_244,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_245,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_246,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_247,715,45.6286,852,46.6165,31.7308,14.8858,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),29
+sensor_248,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_249,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_250,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_251,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_252,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_253,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_254,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_255,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_256,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_257,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_258,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_259,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_260,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_261,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_262,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_263,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_264,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_265,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_266,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_267,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_268,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_269,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_270,5,0.3191,1562,0.3418,0.0,0.3418,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),312
+sensor_271,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_272,7,0.4467,1560,0.4101,0.9615,0.5514,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_273,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_274,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_275,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_276,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],True,False,Removed (Constant),104
+sensor_277,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_278,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_279,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_280,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_281,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_282,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_283,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_284,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],True,False,Removed (Constant),339
+sensor_285,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_286,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_287,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_288,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_289,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_290,10,0.6382,1557,0.6152,0.9615,0.3464,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),128
+sensor_291,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_292,1429,91.1934,138,91.1141,92.3077,1.1935,Extreme (>50%),False,False,Removed (High Missingness >50%),1
+sensor_293,1429,91.1934,138,91.1141,92.3077,1.1935,Extreme (>50%),False,False,Removed (High Missingness >50%),1
+sensor_294,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_295,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_296,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_297,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_298,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_299,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_300,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_301,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_302,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_303,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_304,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_305,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_306,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_307,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_308,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_309,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_310,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_311,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_312,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_313,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],True,False,Removed (Constant),61
+sensor_314,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],True,False,Removed (Constant),61
+sensor_315,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_316,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_317,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_318,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_319,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_320,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_321,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_322,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_323,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_324,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_325,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_326,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_327,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_328,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_329,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_330,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_331,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),315
+sensor_332,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_333,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_334,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_335,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_336,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_337,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_338,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_339,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_340,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_341,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_342,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,True,Removed (Near-Constant >=99%),212
+sensor_343,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_344,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_345,794,50.6701,773,51.8113,34.6154,17.196,Extreme (>50%),False,False,Removed (High Missingness >50%),25
+sensor_346,794,50.6701,773,51.8113,34.6154,17.196,Extreme (>50%),False,False,Removed (High Missingness >50%),25
+sensor_347,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,True,Removed (Near-Constant >=99%),212
+sensor_348,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_349,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_350,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_351,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_352,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_353,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_354,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_355,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_356,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_357,12,0.7658,1555,0.8202,0.0,0.8202,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),124
+sensor_358,1341,85.5775,226,85.3042,89.4231,4.1189,Extreme (>50%),False,False,Removed (High Missingness >50%),5
+sensor_359,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_360,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_361,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_362,51,3.2546,1516,3.4176,0.9615,2.4561,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),53
+sensor_363,51,3.2546,1516,3.4176,0.9615,2.4561,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),53
+sensor_364,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_365,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_366,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_367,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_368,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_369,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_370,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_371,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_372,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_373,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_374,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_375,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_376,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_377,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_378,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_379,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_380,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_381,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_382,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_383,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_384,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_385,715,45.6286,852,46.6165,31.7308,14.8858,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),29
+sensor_386,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_387,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_388,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_389,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_390,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_391,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_392,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_393,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_394,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_395,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_396,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_397,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_398,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_399,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_400,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_401,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_402,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_403,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_404,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_405,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_406,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_407,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_408,5,0.3191,1562,0.3418,0.0,0.3418,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),312
+sensor_409,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_410,7,0.4467,1560,0.4101,0.9615,0.5514,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_411,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_412,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_413,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_414,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],True,False,Removed (Constant),104
+sensor_415,14,0.8934,1553,0.9569,0.0,0.9569,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),104
+sensor_416,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),132
+sensor_417,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_418,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_419,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_420,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_421,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_422,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],True,False,Removed (Constant),339
+sensor_423,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_424,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_425,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_426,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_427,3,0.1914,1564,0.2051,0.0,0.2051,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),339
+sensor_428,10,0.6382,1557,0.6152,0.9615,0.3464,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),128
+sensor_429,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_430,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_431,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_432,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_433,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_434,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_435,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_436,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_437,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_438,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_439,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_440,2,0.1276,1565,0.0684,0.9615,0.8932,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_441,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_442,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_443,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_444,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_445,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_446,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_447,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_448,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_449,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],True,False,Removed (Constant),61
+sensor_450,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],True,False,Removed (Constant),61
+sensor_451,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_452,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_453,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_454,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_455,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_456,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_457,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_458,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_459,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_460,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_461,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],True,False,Removed (Constant),447
+sensor_462,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_463,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_464,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_465,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_466,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],True,False,Removed (Constant),315
+sensor_467,4,0.2553,1563,0.2051,0.9615,0.7565,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),315
+sensor_468,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_469,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_470,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_471,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_472,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_473,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_474,7,0.4467,1560,0.4785,0.0,0.4785,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),192
+sensor_475,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_476,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_477,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_478,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,True,Removed (Near-Constant >=99%),212
+sensor_479,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_480,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),212
+sensor_481,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_482,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_483,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_484,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_485,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_486,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_487,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_488,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_489,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_490,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_491,12,0.7658,1555,0.8202,0.0,0.8202,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),124
+sensor_492,1341,85.5775,226,85.3042,89.4231,4.1189,Extreme (>50%),False,False,Removed (High Missingness >50%),5
+sensor_493,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_494,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_495,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_496,51,3.2546,1516,3.4176,0.9615,2.4561,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),53
+sensor_497,51,3.2546,1516,3.4176,0.9615,2.4561,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),53
+sensor_498,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_499,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_500,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_501,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_502,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_503,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_504,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_505,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_506,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_507,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_508,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_509,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_510,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_511,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_512,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_513,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_514,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_515,6,0.3829,1561,0.4101,0.0,0.4101,Low (0%-5%],True,False,Removed (Constant),212
+sensor_516,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_517,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_518,1018,64.9649,549,64.5249,71.1538,6.6289,Extreme (>50%),False,False,Removed (High Missingness >50%),9
+sensor_519,715,45.6286,852,46.6165,31.7308,14.8858,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),29
+sensor_520,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_521,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_522,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_523,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_524,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_525,24,1.5316,1543,1.6405,0.0,1.6405,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),61
+sensor_526,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_527,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_528,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_529,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_530,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_531,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_532,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_533,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_534,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_535,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_536,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_537,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_538,9,0.5743,1558,0.6152,0.0,0.6152,Low (0%-5%],True,False,Removed (Constant),132
+sensor_539,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_540,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_541,8,0.5105,1559,0.5468,0.0,0.5468,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),180
+sensor_542,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_543,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_544,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_545,2,0.1276,1565,0.1367,0.0,0.1367,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),363
+sensor_546,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_547,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_548,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_549,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_550,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_551,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_552,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_553,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_554,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_555,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_556,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_557,260,16.5922,1307,16.5414,17.3077,0.7663,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),41
+sensor_558,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_559,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_560,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_561,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_562,273,17.4218,1294,17.0198,23.0769,6.0571,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),33
+sensor_563,273,17.4218,1294,17.0198,23.0769,6.0571,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),33
+sensor_564,273,17.4218,1294,17.0198,23.0769,6.0571,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),33
+sensor_565,273,17.4218,1294,17.0198,23.0769,6.0571,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),33
+sensor_566,273,17.4218,1294,17.0198,23.0769,6.0571,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),33
+sensor_567,273,17.4218,1294,17.0198,23.0769,6.0571,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),33
+sensor_568,273,17.4218,1294,17.0198,23.0769,6.0571,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),33
+sensor_569,273,17.4218,1294,17.0198,23.0769,6.0571,Moderate (5%-50%],False,False,Retained + Median Imputed (Unsupervised),33
+sensor_570,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_571,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_572,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_573,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_574,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_575,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_576,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_577,0,0.0,1567,0.0,0.0,0.0,Complete (0%),False,False,Retained (Complete),539
+sensor_578,949,60.5616,618,60.8339,56.7308,4.1031,Extreme (>50%),False,False,Removed (High Missingness >50%),21
+sensor_579,949,60.5616,618,60.8339,56.7308,4.1031,Extreme (>50%),False,False,Removed (High Missingness >50%),21
+sensor_580,949,60.5616,618,60.8339,56.7308,4.1031,Extreme (>50%),False,False,Removed (High Missingness >50%),21
+sensor_581,949,60.5616,618,60.8339,56.7308,4.1031,Extreme (>50%),False,False,Removed (High Missingness >50%),21
+sensor_582,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_583,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_584,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_585,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_586,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_587,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_588,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447
+sensor_589,1,0.0638,1566,0.0684,0.0,0.0684,Low (0%-5%],False,False,Retained + Median Imputed (Unsupervised),447

@@ -5,8 +5,19 @@ description = "Smart Manufacturing: Intelligent Process Quality Analysis and Pre
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "ipykernel>=6.29.0",
+    "matplotlib>=3.9.0",
+    "nbconvert>=7.16.0",
+    "nbformat>=5.10.0",
     "numpy>=2.0.0",
     "pandas>=2.2.0",
+    "scipy>=1.14.0",
+    "seaborn>=0.13.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
 ]
 
 [build-system]
@@ -15,3 +26,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/secom_project"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
