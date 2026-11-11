@@ -1,6 +1,8 @@
 {
   "statistical_summary_csv": "E:\\anti gravity\\DSE\\reports\\phase2_statistical_summary.csv",
+  "observed_vs_imputed_sensitivity_csv": "E:\\anti gravity\\DSE\\reports\\phase2_observed_vs_imputed_sensitivity.csv",
   "statistical_analysis_md": "E:\\anti gravity\\DSE\\reports\\phase2_statistical_analysis.md",
+  "phase2_final_review_md": "E:\\anti gravity\\DSE\\reports\\phase2_final_review.md",
   "figures_generated": [
     "E:\\anti gravity\\DSE\\reports\\figures\\class_distribution.png",
     "E:\\anti gravity\\DSE\\reports\\figures\\missing_values.png",
@@ -14,6 +16,10 @@
   "skew_gt_2_count": 245,
   "skew_gt_10_count": 111,
   "cv_gt_1_count": 122,
+  "raw_significant_0_05_count": 86,
+  "fdr_bh_significant_0_05_count": 25,
+  "obs_fdr_bh_significant_0_05_count": 20,
+  "fdr_sensitivity_disagreements_count": 5,
   "correlation_summary": {
     "total_unique_sensor_pairs": 96580,
     "pearson_pairs_abs_ge_0_99": 112,

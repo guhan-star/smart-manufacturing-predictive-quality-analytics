@@ -1,0 +1,27 @@
+{
+  "strategy": "Timestamp-group-intact chronological 3-way split (Train -> Validation -> Held-out Test)",
+  "train": {
+    "start_timestamp": "2008-07-19 11:55:00",
+    "end_timestamp": "2008-09-04 08:41:00",
+    "rows": 725,
+    "passes_minus1": 658,
+    "fails_1": 67,
+    "fail_rate_pct": 9.2414
+  },
+  "validation": {
+    "start_timestamp": "2008-09-04 08:53:00",
+    "end_timestamp": "2008-09-30 23:58:00",
+    "rows": 483,
+    "passes_minus1": 468,
+    "fails_1": 15,
+    "fail_rate_pct": 3.1056
+  },
+  "test": {
+    "start_timestamp": "2008-10-01 00:20:00",
+    "end_timestamp": "2008-10-17 06:07:00",
+    "rows": 359,
+    "passes_minus1": 337,
+    "fails_1": 22,
+    "fail_rate_pct": 6.1281
+  }
+}

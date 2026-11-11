@@ -176,6 +176,40 @@ def build_missing_value_report(
     return df_out
 
 
+def investigate_near_constant_features(
+    sensors_df: pd.DataFrame,
+    labels_df: pd.DataFrame,
+    near_constant_cols: list[str],
+) -> list[dict]:
+    """Audit exceptional (non-dominant) observations, target labels, and timestamps for near-constant features."""
+    details: list[dict] = []
+    for col in near_constant_cols:
+        non_null = sensors_df[col].dropna()
+        dominant_val = float(non_null.value_counts().index[0])
+        exc_idx = sensors_df.index[sensors_df[col].notna() & (sensors_df[col] != dominant_val)].tolist()
+        exceptional_records = [
+            {
+                "row_index": int(idx),
+                "value": float(sensors_df.loc[idx, col]),
+                "target_label": int(labels_df.loc[idx, "target_label"]),
+                "timestamp": str(labels_df.loc[idx, "timestamp"]),
+            }
+            for idx in exc_idx
+        ]
+        details.append(
+            {
+                "feature": col,
+                "dominant_value": dominant_val,
+                "dominant_count": int((non_null == dominant_val).sum()),
+                "missing_count": int(sensors_df[col].isna().sum()),
+                "exceptional_count": len(exceptional_records),
+                "exceptional_records": exceptional_records,
+                "any_fail_in_exceptional": any(r["target_label"] == 1 for r in exceptional_records),
+            }
+        )
+    return details
+
+
 def evaluate_threshold_impact(sensors_df: pd.DataFrame) -> list[dict]:
     """Quantify how different missingness thresholds affect feature retention (documenting decision impact)."""
     miss_ratio = sensors_df.isna().mean(axis=0)
@@ -253,6 +287,9 @@ def clean_secom_data(
     cleaned_missing = int(cleaned_df[sensor_cols_kept].isna().sum().sum())
 
     cnc = identify_constant_and_near_constant(sensors_df, dominant_threshold=config.near_constant_dominant_threshold)
+    near_const_investigation = investigate_near_constant_features(
+        sensors_df, labels_df, list(plan.near_constant_features_removed)
+    )
     col_miss_pct = sensors_df.isna().mean(axis=0) * 100.0
 
     summary = {
@@ -292,6 +329,7 @@ def clean_secom_data(
         "removed_features": {
             "constant": list(plan.constant_features_removed),
             "near_constant": cnc["near_constant_features"],
+            "near_constant_sensitivity_detail": near_const_investigation,
             "high_missingness_gt_50pct": [
                 {"feature": c, "missing_pct": round(float(col_miss_pct[c]), 4)}
                 for c in sorted(plan.high_missing_features_removed, key=lambda x: col_miss_pct[x], reverse=True)

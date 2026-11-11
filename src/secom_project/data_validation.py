@@ -1,4 +1,4 @@
-"""Phase 2 — Data loading and validation reusing Phase 1 `load_raw_secom()`."""
+"""Phase 2 — Strict data loading, checksum verification, duplicate verification, and outlier audit."""
 
 from __future__ import annotations
 
@@ -12,45 +12,153 @@ import pandas as pd
 from secom_project import DATA_RAW_DIR
 from secom_project.inspect_data import load_raw_secom
 
+EXPECTED_RAW_FILES = ("secom.zip", "secom.data", "secom.names", "secom_labels.data")
+EXPECTED_SENSOR_COLUMNS = 590
 
-def verify_raw_checksums(raw_dir: Path = DATA_RAW_DIR) -> dict[str, bool]:
-    """Verify raw files remain identical to Phase 1 DOWNLOAD_MANIFEST.json checksums."""
+
+def verify_raw_checksums(raw_dir: Path = DATA_RAW_DIR, strict: bool = False) -> dict[str, bool]:
+    """Verify raw files against Phase 1 DOWNLOAD_MANIFEST.json checksums.
+
+    When `strict=True`, raises FileNotFoundError if the manifest or any expected raw file is
+    missing, and raises ValueError on any SHA-256 mismatch.
+    """
     manifest_path = raw_dir / "DOWNLOAD_MANIFEST.json"
     if not manifest_path.exists():
+        if strict:
+            raise FileNotFoundError(
+                f"Missing checksum manifest: {manifest_path}. Run `python -m secom_project.download_data`."
+            )
         return {}
+
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    files_meta = manifest.get("files", {})
     results: dict[str, bool] = {}
-    for fname, meta in manifest.get("files", {}).items():
+    mismatched: list[str] = []
+
+    for fname in EXPECTED_RAW_FILES:
         fpath = raw_dir / fname
-        if fpath.exists():
-            actual = hashlib.sha256(fpath.read_bytes()).hexdigest()
-            results[fname] = actual == meta["sha256"]
-        else:
+        if not fpath.exists():
+            if strict:
+                raise FileNotFoundError(f"Missing required raw dataset file: {fpath}")
             results[fname] = False
+            continue
+        if fname not in files_meta or "sha256" not in files_meta[fname]:
+            if strict:
+                raise ValueError(f"Checksum entry for `{fname}` missing in {manifest_path}")
+            results[fname] = False
+            continue
+        actual = hashlib.sha256(fpath.read_bytes()).hexdigest()
+        matched = actual == files_meta[fname]["sha256"]
+        results[fname] = matched
+        if not matched:
+            mismatched.append(fname)
+
+    if strict and mismatched:
+        raise ValueError(
+            f"SHA-256 checksum verification failed for raw file(s): {', '.join(mismatched)}"
+        )
     return results
 
 
-def load_and_parse_raw_secom(raw_dir: Path = DATA_RAW_DIR) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Reuse Phase 1 `load_raw_secom()` and parse test timestamps without altering raw order."""
+def load_and_parse_raw_secom(
+    raw_dir: Path = DATA_RAW_DIR,
+    strict: bool = True,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Reuse Phase 1 `load_raw_secom()` and enforce strict structural/schema validation."""
+    if strict:
+        verify_raw_checksums(raw_dir, strict=True)
+
     sensors_df, labels_df = load_raw_secom(raw_dir)
+
+    if sensors_df.empty or labels_df.empty:
+        raise ValueError("Loaded raw SECOM table is empty.")
     if len(sensors_df) != len(labels_df):
         raise ValueError(
-            f"Row count mismatch: sensors={len(sensors_df)}, labels={len(labels_df)}"
+            f"Row misalignment between secom.data ({len(sensors_df)}) and secom_labels.data ({len(labels_df)})."
         )
+    if strict and sensors_df.shape[1] != EXPECTED_SENSOR_COLUMNS:
+        raise ValueError(
+            f"Unexpected sensor column count: expected {EXPECTED_SENSOR_COLUMNS}, got {sensors_df.shape[1]}."
+        )
+    if labels_df.shape[1] < 2:
+        raise ValueError(
+            f"Unexpected labels column count: expected >= 2, got {labels_df.shape[1]}."
+        )
+
+    # Validate sensor matrix is strictly numeric and finite (allowing NaN)
+    non_numeric = [c for c in sensors_df.columns if not pd.api.types.is_numeric_dtype(sensors_df[c])]
+    if non_numeric:
+        raise ValueError(f"Corrupted non-numeric sensor column(s) detected: {non_numeric[:5]}")
+    arr = sensors_df.to_numpy(dtype=np.float64)
+    if np.isinf(arr).any():
+        raise ValueError("Corrupted data: +/- infinity values detected in raw sensor matrix.")
+
+    # Validate target labels strictly
+    if labels_df["target_label"].isna().any():
+        n_miss = int(labels_df["target_label"].isna().sum())
+        raise ValueError(f"Missing target_label values detected: {n_miss} row(s).")
+    unique_labels = set(labels_df["target_label"].unique().tolist())
+    if not unique_labels.issubset({-1, 1}):
+        invalid_vals = sorted(unique_labels - {-1, 1})
+        raise ValueError(f"Invalid target_label value(s) detected: {invalid_vals}. Expected only {{-1, 1}}.")
+
+    # Validate timestamps strictly
+    if labels_df["timestamp_raw"].isna().any():
+        n_miss_ts = int(labels_df["timestamp_raw"].isna().sum())
+        raise ValueError(f"Missing timestamp_raw values detected: {n_miss_ts} row(s).")
+
     parsed_labels = labels_df.copy()
     parsed_labels["timestamp"] = pd.to_datetime(
         parsed_labels["timestamp_raw"], format="%d/%m/%Y %H:%M:%S", errors="coerce"
     )
+    if parsed_labels["timestamp"].isna().any():
+        bad_idx = parsed_labels.index[parsed_labels["timestamp"].isna()].tolist()[:5]
+        raise ValueError(
+            f"Invalid/unparseable timestamp_raw values at row index(es) {bad_idx}. "
+            "Expected format DD/MM/YYYY HH:MM:SS."
+        )
+
     return sensors_df, parsed_labels
 
 
 def find_duplicate_columns(sensors_df: pd.DataFrame) -> list[list[str]]:
-    """Detect exact duplicate columns (matching values and NaN mask)."""
-    col_sigs: dict[bytes, list[str]] = {}
+    """Identify exact duplicate columns using hashes for candidate grouping, then exact equality checks.
+
+    Two columns are considered duplicates if and only if:
+    1. Their missing-value (NaN) masks are identical (`s_a.isna().equals(s_b.isna())`), AND
+    2. All observed non-null values are strictly equal (`np.array_equal`).
+    """
+    hash_buckets: dict[bytes, list[str]] = {}
     for col in sensors_df.columns:
         sig = pd.util.hash_array(sensors_df[col].to_numpy()).tobytes()
-        col_sigs.setdefault(sig, []).append(col)
-    return [cols for cols in col_sigs.values() if len(cols) > 1]
+        hash_buckets.setdefault(sig, []).append(col)
+
+    verified_groups: list[list[str]] = []
+    for candidate_cols in hash_buckets.values():
+        if len(candidate_cols) < 2:
+            continue
+        # Partition bucket by exact value & NaN-mask equality (protects against hash collisions)
+        subgroups: list[list[str]] = []
+        for col in candidate_cols:
+            s_cur = sensors_df[col]
+            cur_na = s_cur.isna().to_numpy()
+            cur_vals = s_cur.dropna().to_numpy()
+            placed = False
+            for grp in subgroups:
+                s_ref = sensors_df[grp[0]]
+                if np.array_equal(cur_na, s_ref.isna().to_numpy()) and np.array_equal(
+                    cur_vals, s_ref.dropna().to_numpy()
+                ):
+                    grp.append(col)
+                    placed = True
+                    break
+            if not placed:
+                subgroups.append([col])
+        for grp in subgroups:
+            if len(grp) > 1:
+                verified_groups.append(grp)
+
+    return verified_groups
 
 
 def identify_constant_and_near_constant(
@@ -97,7 +205,6 @@ def compute_iqr_outlier_summary(sensors_df: pd.DataFrame, active_cols: list[str]
     q3 = x.quantile(0.75)
     iqr = q3 - q1
 
-    # Only evaluate IQR fence where IQR > 0 to avoid flagging discrete spikes on zero-IQR columns
     positive_iqr_cols = iqr[iqr > 0].index.tolist()
     x_pos = x[positive_iqr_cols]
     q1_pos = q1[positive_iqr_cols]
@@ -111,7 +218,9 @@ def compute_iqr_outlier_summary(sensors_df: pd.DataFrame, active_cols: list[str]
     mild_cells = int(mild_mask.sum().sum())
     extreme_cells = int(extreme_mask.sum().sum())
 
-    per_feature_extreme_pct = (extreme_mask.sum(axis=0) / x_pos.notna().sum(axis=0) * 100.0).sort_values(ascending=False)
+    per_feature_extreme_pct = (
+        extreme_mask.sum(axis=0) / x_pos.notna().sum(axis=0) * 100.0
+    ).sort_values(ascending=False)
     top_outlier_features = [
         {"feature": col, "extreme_outlier_pct": round(float(pct), 4)}
         for col, pct in per_feature_extreme_pct.head(10).items()
@@ -130,10 +239,10 @@ def compute_iqr_outlier_summary(sensors_df: pd.DataFrame, active_cols: list[str]
     }
 
 
-def validate_secom_raw(raw_dir: Path = DATA_RAW_DIR) -> dict:
-    """Run all Step B validation checks on raw SECOM tables."""
-    checksums = verify_raw_checksums(raw_dir)
-    sensors_df, labels_df = load_and_parse_raw_secom(raw_dir)
+def validate_secom_raw(raw_dir: Path = DATA_RAW_DIR, strict: bool = True) -> dict:
+    """Run all strict validation checks on raw SECOM tables and return a structured summary."""
+    checksums = verify_raw_checksums(raw_dir, strict=strict)
+    sensors_df, labels_df = load_and_parse_raw_secom(raw_dir, strict=strict)
 
     numeric_vals = sensors_df.to_numpy(dtype=np.float64)
     pos_inf = int(np.isposinf(numeric_vals).sum())

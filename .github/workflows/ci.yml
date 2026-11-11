@@ -1,0 +1,40 @@
+name: SECOM Quality & Modeling CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install locked project dependencies
+        run: uv sync --locked
+
+      - name: Retrieve official UCI SECOM raw data (verified by SHA-256)
+        run: uv run python -m secom_project.download_data
+
+      - name: Run Phase 2 data cleaning pipeline
+        run: uv run python -m secom_project.data_cleaning
+
+      - name: Run Phase 3 predictive modeling pipeline
+        run: uv run python -m secom_project.modeling
+
+      - name: Run complete pytest suite
+        run: uv run pytest -v

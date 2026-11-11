@@ -1,0 +1,7 @@
+{
+  "random_seed": 42,
+  "preprocessor": "SecomTrainingPreprocessor (wraps Phase 2 fit_cleaning_plan)",
+  "missing_cutoff": 0.5,
+  "near_constant_threshold": 0.99,
+  "fit_exclusively_on": "chronological Train partition"
+}

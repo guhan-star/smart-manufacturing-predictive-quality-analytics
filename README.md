@@ -3,56 +3,64 @@
 ## Project Overview
 This project investigates semiconductor manufacturing process quality analysis and predictive defect detection using the **UCI SECOM** dataset ([UCI Machine Learning Repository ID 179](https://archive.ics.uci.edu/dataset/179/secom)).
 
-## Current Phase: Phase 2 — Data Preparation & Exploratory Data Analysis
-*(Phase 1 audit and data dictionary remain preserved in `docs/` and `reports/secom_audit_summary.json`. No ML model training or dashboarding has been performed yet.)*
+## Current Phase: Phase 3 — Predictive Quality Modelling
+*(Phases 1 and 2 remain preserved in `docs/`, `data/`, and `reports/`. No dashboard has been built yet.)*
 
 ### Project Structure
 ```text
 .
+├── .github/workflows/ci.yml               # GitHub Actions CI (Phases 1–3 + pytest)
 ├── pyproject.toml                         # Project metadata and dependencies
-├── requirements.txt                       # Pinned runtime & test dependencies
+├── requirements.txt                       # Pinned dependencies
 ├── README.md                              # Project documentation
 ├── data/
 │   ├── raw/                               # Official UCI SECOM files (preserved unmodified)
-│   └── processed/
-│       ├── secom_cleaned.csv              # Analysis-ready dataset (1567 x 443)
-│       └── secom_cleaning_summary.json    # Machine-readable cleaning audit & medians
+│   └── processed/                         # Phase 2 cleaned dataset & cleaning summary
 ├── docs/
-│   ├── data_dictionary.md                 # Phase 1 documented & anonymous sensor dictionary
+│   ├── data_dictionary.md                 # Phase 1 field dictionary
 │   ├── data_dictionary.csv                # Machine-readable field dictionary
-│   └── dataset_audit_report.md            # Phase 1 audit, timestamp & leakage analysis
+│   ├── dataset_audit_report.md            # Phase 1 audit & leakage analysis
+│   └── phase3_execution_plan.md           # Phase 3 design plan
+├── models/                                # Saved Phase 3 pipelines & metadata
 ├── notebooks/
 │   └── 02_data_preparation_and_eda.ipynb  # Executed Phase 2 preparation & EDA notebook
 ├── reports/
 │   ├── secom_audit_summary.json           # Phase 1 audit metrics
-│   ├── phase2_data_quality_report.md      # Phase 2 validation, cleaning, outliers & safeguards
-│   ├── phase2_statistical_analysis.md     # Phase 2 stats, rankings, correlations & chart interpretations
-│   ├── phase2_statistical_summary.csv     # Descriptive stats & rankings for 440 cleaned sensors
-│   ├── phase2_missing_value_report.csv    # Per-feature missingness audit (590 raw sensors)
-│   └── figures/                           # 8 Phase 2 visualisations (PNG)
+│   ├── phase2_*                           # Phase 2 quality, statistical, BH-FDR & sensitivity reports
+│   ├── figures/                           # Phase 2 visualisations (8 PNGs)
+│   └── phase3/                            # Phase 3 modeling metrics, plots & report
+│       ├── model_comparison.csv
+│       ├── test_metrics.json
+│       ├── classification_report.txt
+│       ├── confusion_matrix.png
+│       ├── precision_recall_curve.png
+│       ├── roc_curve.png
+│       ├── feature_importance.csv
+│       ├── feature_importance.png
+│       └── phase3_modeling_report.md
 ├── src/
 │   └── secom_project/
-│       ├── __init__.py
-│       ├── download_data.py               # Phase 1: Reproducible UCI SECOM retrieval
-│       ├── inspect_data.py                # Phase 1: Raw loader (load_raw_secom) & audit
-│       ├── data_validation.py             # Phase 2: Validation & outlier/duplicate checks
+│       ├── download_data.py               # Phase 1: UCI SECOM retrieval & SHA-256 manifest
+│       ├── inspect_data.py                # Phase 1: Raw loader (`load_raw_secom`) & audit
+│       ├── data_validation.py             # Phase 2: Strict validation & duplicate checks
 │       ├── data_cleaning.py               # Phase 2: Fit/transform cleaning pipeline
-│       └── eda.py                         # Phase 2: Stats, feature rankings & visualisations
+│       ├── eda.py                         # Phase 2: Stats, BH-FDR, sensitivity & plots
+│       ├── validation.py                  # Phase 3: Chronological Train/Val/Test splitter
+│       ├── evaluation.py                  # Phase 3: Metrics & validation-only threshold sweep
+│       └── modeling.py                    # Phase 3: Leakage-safe models, importance & outputs
 └── tests/
-    └── test_data_cleaning.py              # Automated Phase 2 tests (runnable from repo root)
+    ├── test_data_cleaning.py              # Phase 2 strict validation, leakage & sensitivity tests
+    ├── test_temporal_validation.py        # Phase 3 chronological split & timestamp-group tests
+    ├── test_modeling.py                   # Phase 3 pipeline isolation, training & persistence tests
+    └── test_evaluation.py                 # Phase 3 metric, threshold & deliverable tests
 ```
 
-## Setup & Usage
-Using `uv` from the repository root:
+## Setup & Reproduction (Repository Root)
 ```bash
-uv sync
+uv sync --locked
 uv run python -m secom_project.download_data
 uv run python -m secom_project.data_cleaning
 uv run python -m secom_project.eda
+uv run python -m secom_project.modeling
 uv run pytest -v
-```
-
-To re-execute the Phase 2 notebook end-to-end:
-```bash
-uv run jupyter nbconvert --to notebook --execute --inplace notebooks/02_data_preparation_and_eda.ipynb
 ```

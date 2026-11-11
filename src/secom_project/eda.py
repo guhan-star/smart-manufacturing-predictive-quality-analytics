@@ -106,10 +106,69 @@ def compute_descriptive_statistics(
         )
 
     df_stats = pd.DataFrame(records)
+    df_stats["mannwhitney_p_fdr_bh"] = stats.false_discovery_control(
+        df_stats["mannwhitney_p"].to_numpy(dtype=float), method="bh"
+    )
+    df_stats["is_raw_significant_0_05"] = df_stats["mannwhitney_p"] < 0.05
+    df_stats["is_fdr_significant_0_05"] = df_stats["mannwhitney_p_fdr_bh"] < 0.05
     df_stats["missingness_rank"] = df_stats["raw_missing_count"].rank(ascending=False, method="min").astype(int)
     df_stats["variance_rank"] = df_stats["variance"].rank(ascending=False, method="min").astype(int)
     df_stats["unique_values_rank"] = df_stats["n_unique_non_null_raw"].rank(ascending=False, method="min").astype(int)
     return df_stats
+
+
+def compute_observed_only_sensitivity(
+    raw_sensors_df: pd.DataFrame,
+    labels_df: pd.DataFrame,
+    stats_df: pd.DataFrame,
+) -> pd.DataFrame:
+    """Compare observed-only (non-imputed) Pass/Fail statistics against median-imputed results."""
+    fail_mask = labels_df["target_label"] == 1
+    pass_mask = labels_df["target_label"] == -1
+    y_bin = fail_mask.astype(int)
+
+    imputed_lookup = stats_df.set_index("feature")
+    rows = []
+    for col in stats_df["feature"]:
+        s_raw = raw_sensors_df[col]
+        obs_pass = s_raw.loc[pass_mask].dropna()
+        obs_fail = s_raw.loc[fail_mask].dropna()
+
+        _, obs_mw_p = stats.mannwhitneyu(obs_pass, obs_fail, alternative="two-sided")
+        valid_mask = s_raw.notna()
+        obs_rho, _ = stats.spearmanr(s_raw.loc[valid_mask], y_bin.loc[valid_mask])
+
+        imp_r = imputed_lookup.loc[col]
+        rows.append(
+            {
+                "feature": col,
+                "pass_obs_n": int(len(obs_pass)),
+                "fail_obs_n": int(len(obs_fail)),
+                "pass_obs_mean": round(float(obs_pass.mean()), 6),
+                "pass_obs_median": round(float(obs_pass.median()), 6),
+                "pass_obs_std": round(float(obs_pass.std(ddof=1)), 6),
+                "fail_obs_mean": round(float(obs_fail.mean()), 6),
+                "fail_obs_median": round(float(obs_fail.median()), 6),
+                "fail_obs_std": round(float(obs_fail.std(ddof=1)), 6),
+                "obs_spearman_rho": round(float(obs_rho), 6),
+                "imputed_spearman_rho": float(imp_r["spearman_rho_with_fail"]),
+                "obs_mannwhitney_p": float(obs_mw_p),
+                "imputed_mannwhitney_p": float(imp_r["mannwhitney_p"]),
+                "imputed_mannwhitney_p_fdr_bh": float(imp_r["mannwhitney_p_fdr_bh"]),
+                "imputed_raw_sig_0_05": bool(imp_r["is_raw_significant_0_05"]),
+                "imputed_fdr_sig_0_05": bool(imp_r["is_fdr_significant_0_05"]),
+            }
+        )
+
+    sens_df = pd.DataFrame(rows)
+    sens_df["obs_mannwhitney_p_fdr_bh"] = stats.false_discovery_control(
+        sens_df["obs_mannwhitney_p"].to_numpy(dtype=float), method="bh"
+    )
+    sens_df["obs_raw_sig_0_05"] = sens_df["obs_mannwhitney_p"] < 0.05
+    sens_df["obs_fdr_sig_0_05"] = sens_df["obs_mannwhitney_p_fdr_bh"] < 0.05
+    sens_df["raw_conclusion_differs"] = sens_df["obs_raw_sig_0_05"] != sens_df["imputed_raw_sig_0_05"]
+    sens_df["fdr_conclusion_differs"] = sens_df["obs_fdr_sig_0_05"] != sens_df["imputed_fdr_sig_0_05"]
+    return sens_df
 
 
 def compute_correlation_summary(cleaned_df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
@@ -447,10 +506,12 @@ def write_statistical_analysis_report(
     top10_cand = stats_df.reindex(stats_df["pearson_r_with_fail"].abs().nlargest(10).index)
     cand_rows = "\n".join(
         f"| `{r['feature']}` | {r['pearson_r_with_fail']:+.4f} | {r['spearman_rho_with_fail']:+.4f} | "
-        f"{r['mannwhitney_p']:.2e} | {r['pass_median']:.4f} | {r['fail_median']:.4f} | "
-        f"{r['pass_iqr']:.4f} | {r['fail_iqr']:.4f} |"
+        f"{r['mannwhitney_p']:.2e} | {r['mannwhitney_p_fdr_bh']:.2e} | {'Yes' if r['is_fdr_significant_0_05'] else 'No'} | "
+        f"{r['pass_median']:.4f} | {r['fail_median']:.4f} | {r['pass_iqr']:.4f} | {r['fail_iqr']:.4f} |"
         for _, r in top10_cand.iterrows()
     )
+    n_raw_sig = int(stats_df["is_raw_significant_0_05"].sum())
+    n_fdr_sig = int(stats_df["is_fdr_significant_0_05"].sum())
 
     top10_pairs = "\n".join(
         f"| `{p['feature_a']}` | `{p['feature_b']}` | {p['pearson_r']:+.6f} |"
@@ -514,15 +575,17 @@ def write_statistical_analysis_report(
 
 Because `{skew_gt2}` sensors are strongly skewed and class sizes are unbalanced (`1,463` vs `104`), **non-parametric Mann-Whitney U tests** and **Spearman rank correlation (`rho`)** are preferred alongside **Pearson `r`** and median/IQR comparisons (parametric normality assumptions of Student's t-test are violated for most sensors).
 
-| Feature | Pearson `r` | Spearman `rho` | Mann-Whitney `p` | Pass Median | Fail Median | Pass IQR | Fail IQR |
-|---|---:|---:|---:|---:|---:|---:|---:|
+| Feature | Pearson `r` | Spearman `rho` | Raw MW `p` | BH-FDR `q` | FDR Sig (`q<0.05`) | Pass Median | Fail Median | Pass IQR | Fail IQR |
+|---|---:|---:|---:|---:|:---:|---:|---:|---:|---:|
 {cand_rows}
 
+- **Multiple-Testing Summary (440 Tests):** `{n_raw_sig}` features have raw `p < 0.05`, whereas only **`{n_fdr_sig}`** remain significant after **Benjamini–Hochberg FDR (`q < 0.05`)**. Across 440 simultaneous hypothesis tests, raw `p < 0.05` expects ~22 false discoveries by chance alone; BH-FDR controls the expected proportion of false discoveries among rejected hypotheses at 5%.
+
 ### Statistical Limitations & Assumptions
-1. **Association ≠ Causation:** Statistical separation (`p < 0.001`) indicates correlation with test outcomes, not physical root cause; sensor definitions and upstream/downstream process order are undocumented.
+1. **Association ≠ Causation:** Statistical separation (`q < 0.05`) indicates correlation with test outcomes, not physical root cause; sensor definitions and upstream/downstream process order are undocumented.
 2. **Class Imbalance Compression:** At `6.64%` Fail prevalence, linear Pearson point-biserial `r` is compressed (max `|r| = 0.1560`), even when tail failure rates multiply (`3.9×` above Q75 in `sensor_059`).
-3. **Multiple Comparisons:** Screening `440` features requires adjusting significance thresholds (e.g., Bonferroni `p < 1.14e-4` or FDR) and confirming stability across chronological folds in Phase 3.
-4. **Imputation Effect:** Unsupervised median imputation preserves row count without target leakage, but compresses variance/IQR on moderately missing features (`sensor_247`, `sensor_519` at `45.63%` missing).
+3. **Multiple Comparisons & Observed-Only Sensitivity:** Screening `440` features requires BH-FDR control (`{n_fdr_sig}` FDR-significant on imputed data vs `20` on observed-only data; see `reports/phase2_observed_vs_imputed_sensitivity.csv` and `reports/phase2_final_review.md`).
+4. **Imputation Effect:** Unsupervised median imputation preserves row count without target leakage, but compresses variance/IQR on moderately missing features (`sensor_247`, `sensor_519`, `sensor_112` at `45.63%` missing).
 
 ---
 
@@ -592,22 +655,99 @@ Across the 90-day timeline, monthly fail rates swing from `22.22%` (Jul) down to
     out_path.write_text(content, encoding="utf-8")
 
 
+def write_phase2_final_review_report(
+    stats_df: pd.DataFrame,
+    sens_df: pd.DataFrame,
+    cleaning_summary: dict,
+    out_path: Path = REPORTS_DIR / "phase2_final_review.md",
+) -> None:
+    """Write `reports/phase2_final_review.md` summarizing all Part A Phase 2 review fixes."""
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    n_tests = len(stats_df)
+    raw_sig = int(stats_df["is_raw_significant_0_05"].sum())
+    fdr_sig = int(stats_df["is_fdr_significant_0_05"].sum())
+    obs_raw_sig = int(sens_df["obs_raw_sig_0_05"].sum())
+    obs_fdr_sig = int(sens_df["obs_fdr_sig_0_05"].sum())
+
+    diff_fdr = sens_df[sens_df["fdr_conclusion_differs"]].sort_values("obs_mannwhitney_p")
+    diff_rows = "\n".join(
+        f"| `{r['feature']}` | {r['pass_obs_n']} / {r['fail_obs_n']} | "
+        f"{r['obs_mannwhitney_p']:.4e} ({r['obs_mannwhitney_p_fdr_bh']:.4f}) | "
+        f"{r['imputed_mannwhitney_p']:.4e} ({r['imputed_mannwhitney_p_fdr_bh']:.4f}) | "
+        f"Obs FDR={r['obs_fdr_sig_0_05']} vs Imp FDR={r['imputed_fdr_sig_0_05']} |"
+        for _, r in diff_fdr.iterrows()
+    )
+
+    nc_details = cleaning_summary["removed_features"].get("near_constant_sensitivity_detail", [])
+    nc_rows = "\n".join(
+        f"| `{d['feature']}` | {d['dominant_value']} ({d['dominant_count']}x) | {d['missing_count']} | "
+        f"{d['exceptional_records'][0]['row_index']} | {d['exceptional_records'][0]['value']} | "
+        f"{d['exceptional_records'][0]['target_label']} ({d['exceptional_records'][0]['timestamp']}) |"
+        for d in nc_details
+        if d["exceptional_records"]
+    )
+
+    content = f"""# Phase 2 Final Review & Fixes Summary — UCI SECOM
+
+## 1. Multiple-Testing Correction (Benjamini–Hochberg FDR)
+- **Tests Performed:** `{n_tests}` two-sided Mann–Whitney U tests comparing Pass (`-1`) vs. Fail (`1`) distributions across the `440` cleaned active sensors.
+- **Results (Imputed Dataset):**
+  - Raw `p < 0.05`: **`{raw_sig}`** features
+  - Benjamini–Hochberg FDR `q < 0.05`: **`{fdr_sig}`** features (`reports/phase2_statistical_summary.csv` retains raw `mannwhitney_p`, adjusted `mannwhitney_p_fdr_bh`, `is_raw_significant_0_05`, and `is_fdr_significant_0_05`).
+- **Interpretation:** Under `440` simultaneous tests, raw `p < 0.05` allows ~`22` expected false positives by random chance. BH-FDR controls the expected false-discovery proportion at `5%`, tightening candidate discoveries from `{raw_sig}` down to `{fdr_sig}`.
+
+## 2. Observed-Only vs. Median-Imputed Statistical Sensitivity (`reports/phase2_observed_vs_imputed_sensitivity.csv`)
+- **Comparison Summary:**
+  - Raw `p < 0.05`: `{obs_raw_sig}` (observed-only) vs. `{raw_sig}` (median-imputed)
+  - BH-FDR `q < 0.05`: **`{obs_fdr_sig}`** (observed-only) vs. **`{fdr_sig}`** (median-imputed)
+- **Features Where BH-FDR Conclusions Differ (`{len(diff_fdr)}` features):**
+
+| Feature | Observed `n` (Pass / Fail) | Observed `p` (BH `q`) | Imputed `p` (BH `q`) | Conclusion Shift |
+|---|---:|---:|---:|---|
+{diff_rows}
+
+- **Key Takeaway & Small-Sample Limitation:** In `sensor_112` (`45.63%` missing overall; `n_pass=781`, `n_fail=71`), median imputation injects `682` identical Pass median constants vs `33` Fail medians, artificially tightening tied ranks and pushing `q` from `0.0938` (not FDR-significant on observed data) down to `0.0493`. Similarly, `sensor_122`, `sensor_298`, `sensor_431`, and `sensor_452` lie right on the `q ≈ 0.05` boundary. Features with high missingness (`45.6%`) have substantially smaller observed Fail counts (`n=71` vs `104`), reducing statistical power and amplifying sensitivity to non-MCAR imputation.
+
+## 3. Near-Constant Feature Sensitivity Investigation
+All `6` removed near-constant features (`>= 99%` dominant value) equal `0.0` in `1,560 / 1,561` non-null rows (`6` NaNs each) and share **one single exceptional wafer observation (`row_index = 1458`, `target_label = -1` Pass, `timestamp = 2008-10-11 07:39:00`)**:
+
+| Feature | Dominant Value (Count) | NaN Count | Exceptional Row | Exceptional Value | Label & Timestamp |
+|---|---:|---:|---:|---:|---|
+{nc_rows}
+
+- **Assessment:** Retaining these `6` features provides zero reliable predictive signal because: (1) all non-zero variance comes from a single Pass wafer (`row 1458`) occurring in October 2008 (Holdout), making all 6 features **strictly zero-variance (`0.0` everywhere)** in Pre-Holdout training (`2008-07`–`2008-09`), and (2) Phase 3 controlled experiments confirmed retaining them degraded Random Forest OOF PR-AUC (`0.1216 → 0.0429`). Removing them is preserved as the reproducible strategy.
+
+## 4. Strict Raw-Data Validation & Duplicate-Column Verification
+- `data_validation.py` now enforces strict rejection (`FileNotFoundError` / `ValueError`) for missing manifest or raw files, SHA-256 mismatches, row/dimension misalignment, non-numeric or `±inf` corruption, invalid/missing `target_label`, and missing/unparseable timestamps.
+- `find_duplicate_columns()` now uses hashes strictly as a candidate pre-filter and verifies **exact missing-value mask equality AND exact observed-value array equality** before flagging any duplicate column.
+
+## 5. Leakage Tests & Continuous Integration
+- `tests/test_data_cleaning.py` verifies that substantial test-set value perturbations (`+1e6`), injected test missingness (`>60%`), and target-label flips leave `fit_cleaning_plan()` medians and feature selection completely invariant, and that `apply_cleaning_plan()` imputes test NaNs using training-fitted medians.
+- `.github/workflows/ci.yml` executes `uv sync`, raw retrieval/verification, cleaning, and `pytest` on every push and pull request.
+"""
+    out_path.write_text(content, encoding="utf-8")
+
+
 def run_eda(
     cleaned_csv: Path = DATA_PROCESSED_DIR / "secom_cleaned.csv",
     missing_csv: Path = REPORTS_DIR / "phase2_missing_value_report.csv",
     cleaning_summary_json: Path = DATA_PROCESSED_DIR / "secom_cleaning_summary.json",
     reports_dir: Path = REPORTS_DIR,
 ) -> dict:
-    """Execute statistical analysis, rankings, correlation analysis, and visualisations."""
+    """Execute statistical analysis, BH-FDR correction, observed-only sensitivity, rankings, and visualisations."""
     cleaned_df = pd.read_csv(cleaned_csv)
     missing_report_df = pd.read_csv(missing_csv)
     cleaning_summary = json.loads(cleaning_summary_json.read_text(encoding="utf-8"))
-    raw_sensors_df, _ = load_and_parse_raw_secom(DATA_RAW_DIR)
+    raw_sensors_df, raw_labels_df = load_and_parse_raw_secom(DATA_RAW_DIR)
     raw_row_missing_pct = raw_sensors_df.isna().mean(axis=1) * 100.0
 
     stats_df = compute_descriptive_statistics(cleaned_df, raw_sensors_df)
     stats_csv = reports_dir / "phase2_statistical_summary.csv"
     stats_df.to_csv(stats_csv, index=False)
+
+    sens_df = compute_observed_only_sensitivity(raw_sensors_df, raw_labels_df, stats_df)
+    sens_csv = reports_dir / "phase2_observed_vs_imputed_sensitivity.csv"
+    sens_df.to_csv(sens_csv, index=False)
 
     pearson_mat, spearman_mat, corr_summary = compute_correlation_summary(cleaned_df)
     figures = generate_visualisations(
@@ -629,13 +769,27 @@ def run_eda(
         out_path=report_md,
     )
 
+    review_md = reports_dir / "phase2_final_review.md"
+    write_phase2_final_review_report(
+        stats_df=stats_df,
+        sens_df=sens_df,
+        cleaning_summary=cleaning_summary,
+        out_path=review_md,
+    )
+
     eda_summary = {
         "statistical_summary_csv": str(stats_csv),
+        "observed_vs_imputed_sensitivity_csv": str(sens_csv),
         "statistical_analysis_md": str(report_md),
+        "phase2_final_review_md": str(review_md),
         "figures_generated": [str(p) for p in figures],
         "skew_gt_2_count": int((stats_df["skewness"].abs() > 2).sum()),
         "skew_gt_10_count": int((stats_df["skewness"].abs() > 10).sum()),
         "cv_gt_1_count": int((stats_df["cv_abs"] > 1.0).sum()),
+        "raw_significant_0_05_count": int(stats_df["is_raw_significant_0_05"].sum()),
+        "fdr_bh_significant_0_05_count": int(stats_df["is_fdr_significant_0_05"].sum()),
+        "obs_fdr_bh_significant_0_05_count": int(sens_df["obs_fdr_sig_0_05"].sum()),
+        "fdr_sensitivity_disagreements_count": int(sens_df["fdr_conclusion_differs"].sum()),
         "correlation_summary": corr_summary,
     }
     (reports_dir / "phase2_eda_summary.json").write_text(

@@ -1,0 +1,11 @@
+Selected Model: HistGradientBoosting (threshold=0.19)
+Held-out Test Set: 2008-10-01 00:20:00 to 2008-10-17 06:07:00 (n=359)
+
+              precision    recall  f1-score   support
+
+   Pass (-1)     0.9364    0.9614    0.9488       337
+    Fail (1)     0.0000    0.0000    0.0000        22
+
+    accuracy                         0.9025       359
+   macro avg     0.4682    0.4807    0.4744       359
+weighted avg     0.8790    0.9025    0.8906       359

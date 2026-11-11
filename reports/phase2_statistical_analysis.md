@@ -86,24 +86,26 @@
 
 Because `245` sensors are strongly skewed and class sizes are unbalanced (`1,463` vs `104`), **non-parametric Mann-Whitney U tests** and **Spearman rank correlation (`rho`)** are preferred alongside **Pearson `r`** and median/IQR comparisons (parametric normality assumptions of Student's t-test are violated for most sensors).
 
-| Feature | Pearson `r` | Spearman `rho` | Mann-Whitney `p` | Pass Median | Fail Median | Pass IQR | Fail IQR |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| `sensor_059` | +0.1560 | +0.1659 | 5.18e-11 | 0.7482 | 5.5223 | 5.8532 | 14.4157 |
-| `sensor_103` | +0.1512 | +0.1451 | 9.43e-09 | -0.0102 | -0.0082 | 0.0035 | 0.0049 |
-| `sensor_510` | +0.1317 | +0.1174 | 3.42e-06 | 46.4122 | 58.2324 | 27.8671 | 44.1835 |
-| `sensor_348` | +0.1308 | +0.0802 | 1.50e-03 | 0.0226 | 0.0246 | 0.0089 | 0.0163 |
-| `sensor_431` | +0.1199 | +0.0757 | 2.74e-03 | 16.2134 | 18.3800 | 10.6790 | 10.1893 |
-| `sensor_434` | +0.1113 | +0.0586 | 2.04e-02 | 10.1575 | 11.3137 | 5.1799 | 5.3844 |
-| `sensor_430` | +0.1091 | +0.0516 | 4.12e-02 | 10.9889 | 13.2558 | 10.4337 | 10.7470 |
-| `sensor_021` | +0.1083 | +0.0884 | 4.68e-04 | -5528.7500 | -5447.5000 | 608.1250 | 365.1875 |
-| `sensor_435` | +0.1083 | +0.0297 | 2.40e-01 | 4.5274 | 4.7435 | 2.3079 | 2.5280 |
-| `sensor_028` | -0.1070 | -0.1001 | 7.45e-05 | 69.2444 | 68.1945 | 4.9000 | 3.9223 |
+| Feature | Pearson `r` | Spearman `rho` | Raw MW `p` | BH-FDR `q` | FDR Sig (`q<0.05`) | Pass Median | Fail Median | Pass IQR | Fail IQR |
+|---|---:|---:|---:|---:|:---:|---:|---:|---:|---:|
+| `sensor_059` | +0.1560 | +0.1659 | 5.18e-11 | 2.28e-08 | Yes | 0.7482 | 5.5223 | 5.8532 | 14.4157 |
+| `sensor_103` | +0.1512 | +0.1451 | 9.43e-09 | 2.08e-06 | Yes | -0.0102 | -0.0082 | 0.0035 | 0.0049 |
+| `sensor_510` | +0.1317 | +0.1174 | 3.42e-06 | 3.01e-04 | Yes | 46.4122 | 58.2324 | 27.8671 | 44.1835 |
+| `sensor_348` | +0.1308 | +0.0802 | 1.50e-03 | 3.51e-02 | Yes | 0.0226 | 0.0246 | 0.0089 | 0.0163 |
+| `sensor_431` | +0.1199 | +0.0757 | 2.74e-03 | 4.93e-02 | Yes | 16.2134 | 18.3800 | 10.6790 | 10.1893 |
+| `sensor_434` | +0.1113 | +0.0586 | 2.04e-02 | 1.66e-01 | No | 10.1575 | 11.3137 | 5.1799 | 5.3844 |
+| `sensor_430` | +0.1091 | +0.0516 | 4.12e-02 | 2.29e-01 | No | 10.9889 | 13.2558 | 10.4337 | 10.7470 |
+| `sensor_021` | +0.1083 | +0.0884 | 4.68e-04 | 1.42e-02 | Yes | -5528.7500 | -5447.5000 | 608.1250 | 365.1875 |
+| `sensor_435` | +0.1083 | +0.0297 | 2.40e-01 | 5.93e-01 | No | 4.5274 | 4.7435 | 2.3079 | 2.5280 |
+| `sensor_028` | -0.1070 | -0.1001 | 7.45e-05 | 3.64e-03 | Yes | 69.2444 | 68.1945 | 4.9000 | 3.9223 |
+
+- **Multiple-Testing Summary (440 Tests):** `86` features have raw `p < 0.05`, whereas only **`25`** remain significant after **Benjamini–Hochberg FDR (`q < 0.05`)**. Across 440 simultaneous hypothesis tests, raw `p < 0.05` expects ~22 false discoveries by chance alone; BH-FDR controls the expected proportion of false discoveries among rejected hypotheses at 5%.
 
 ### Statistical Limitations & Assumptions
-1. **Association ≠ Causation:** Statistical separation (`p < 0.001`) indicates correlation with test outcomes, not physical root cause; sensor definitions and upstream/downstream process order are undocumented.
+1. **Association ≠ Causation:** Statistical separation (`q < 0.05`) indicates correlation with test outcomes, not physical root cause; sensor definitions and upstream/downstream process order are undocumented.
 2. **Class Imbalance Compression:** At `6.64%` Fail prevalence, linear Pearson point-biserial `r` is compressed (max `|r| = 0.1560`), even when tail failure rates multiply (`3.9×` above Q75 in `sensor_059`).
-3. **Multiple Comparisons:** Screening `440` features requires adjusting significance thresholds (e.g., Bonferroni `p < 1.14e-4` or FDR) and confirming stability across chronological folds in Phase 3.
-4. **Imputation Effect:** Unsupervised median imputation preserves row count without target leakage, but compresses variance/IQR on moderately missing features (`sensor_247`, `sensor_519` at `45.63%` missing).
+3. **Multiple Comparisons & Observed-Only Sensitivity:** Screening `440` features requires BH-FDR control (`25` FDR-significant on imputed data vs `20` on observed-only data; see `reports/phase2_observed_vs_imputed_sensitivity.csv` and `reports/phase2_final_review.md`).
+4. **Imputation Effect:** Unsupervised median imputation preserves row count without target leakage, but compresses variance/IQR on moderately missing features (`sensor_247`, `sensor_519`, `sensor_112` at `45.63%` missing).
 
 ---
 
