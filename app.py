@@ -30,31 +30,108 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Subtle industrial analytics styling
+# Cohesive dark industrial analytics styling
 st.markdown(
     """
     <style>
-    .block-container { padding-top: 1.5rem; padding-bottom: 2rem; }
+    .block-container {
+        padding-top: 1.4rem;
+        padding-bottom: 2.25rem;
+        max-width: 1380px;
+    }
     .hero-banner {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 65%, #0369a1 100%);
         color: #f8fafc;
-        padding: 1.25rem 1.5rem;
+        padding: 1.35rem 1.6rem;
         border-radius: 0.75rem;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1.35rem;
         border-left: 6px solid #38bdf8;
+        box-shadow: 0 4px 16px rgba(2, 132, 199, 0.14);
     }
-    .hero-banner h1 { margin: 0; font-size: 1.65rem; font-weight: 700; color: #ffffff; }
-    .hero-banner p { margin: 0.35rem 0 0 0; font-size: 0.95rem; color: #cbd5e1; }
+    .hero-banner h1 {
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: 700;
+        line-height: 1.25;
+        color: #ffffff;
+    }
+    .hero-banner p {
+        margin: 0.4rem 0 0 0;
+        font-size: 0.95rem;
+        color: #cbd5e1;
+    }
     [data-testid="stMetric"] {
         background-color: var(--secondary-background-color, #1e293b);
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        padding: 0.85rem 1rem;
-        border-radius: 0.6rem;
+        border: 1px solid rgba(148, 163, 184, 0.30);
+        border-top: 3px solid rgba(56, 189, 248, 0.55);
+        padding: 0.9rem 1rem;
+        border-radius: 0.65rem;
+        min-height: 122px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+    [data-testid="stMetricLabel"] {
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        line-height: 1.25 !important;
+        min-height: 2.25rem;
+    }
+    [data-testid="stMetricLabel"] > div,
+    [data-testid="stMetricLabel"] p {
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        font-size: 0.84rem !important;
+        font-weight: 600 !important;
+        color: #cbd5e1 !important;
+    }
+    [data-testid="stMetricValue"] {
+        font-size: clamp(1.05rem, 1.35vw, 1.48rem) !important;
+        font-weight: 700 !important;
+        line-height: 1.2 !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+    [data-testid="stMetricValue"] > div {
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: normal !important;
+        word-break: break-word;
+    }
+    [data-testid="stMetricDelta"] {
+        font-size: 0.78rem !important;
+        line-height: 1.25 !important;
+        white-space: normal !important;
+        color: #94a3b8 !important;
+        background: transparent !important;
+        padding-left: 0 !important;
+    }
+    [data-testid="stMetricDelta"] svg {
+        display: none !important;
     }
     </style>
     """,
     unsafe_allow_html=True,
 )
+
+
+def style_plotly_figure(fig: go.Figure, *, height: int, margin: dict | None = None) -> go.Figure:
+    """Apply uniform dark-compatible layout, clean margins, and non-clipping axes."""
+    fig.update_layout(
+        height=height,
+        margin=margin or dict(t=58, b=42, l=24, r=24),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(size=12),
+        title=dict(font=dict(size=15), x=0.0, xanchor="left"),
+    )
+    fig.update_xaxes(automargin=True, gridcolor="rgba(148, 163, 184, 0.16)", zerolinecolor="rgba(148, 163, 184, 0.25)")
+    fig.update_yaxes(automargin=True, gridcolor="rgba(148, 163, 184, 0.16)", zerolinecolor="rgba(148, 163, 184, 0.25)")
+    return fig
 
 
 @st.cache_resource(show_spinner=False)
@@ -120,24 +197,43 @@ def render_overview(
     miss = q["missing_values"]
 
     c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("Wafer Records", f"{dim['sensor_rows']:,}")
-    c2.metric("Raw Sensors", f"{dim['sensor_columns']}", "440 active after cleaning")
-    c3.metric("Pass (-1)", f"{tgt['pass_count']:,}", f"{tgt['pass_pct']:.2f}%")
-    c4.metric("Fail (1)", f"{tgt['fail_count']:,}", f"{tgt['fail_pct']:.2f}% (14.07:1)")
-    c5.metric("Raw Missing Cells", f"{miss['sensor_missing_cells']:,}", f"{miss['sensor_missing_pct']:.2f}%")
+    c1.metric("Wafer Records", f"{dim['sensor_rows']:,}", "Jul–Oct 2008 batch", delta_color="off")
+    c2.metric("Raw Sensors", f"{dim['sensor_columns']:,}", "440 active after cleaning", delta_color="off")
+    c3.metric("Pass (-1) Wafers", f"{tgt['pass_count']:,}", f"{tgt['pass_pct']:.2f}% of dataset", delta_color="off")
+    c4.metric("Fail (1) Wafers", f"{tgt['fail_count']:,}", f"{tgt['fail_pct']:.2f}% (14.07:1 ratio)", delta_color="off")
+    c5.metric("Raw Missing Cells", f"{miss['sensor_missing_cells']:,}", f"{miss['sensor_missing_pct']:.2f}% of raw grid", delta_color="off")
 
-    col_left, col_right = st.columns([1.05, 1.35])
+    st.markdown("<div style='height: 0.5rem'></div>", unsafe_allow_html=True)
+
+    col_left, col_right = st.columns([1.05, 1.35], gap="large")
     with col_left:
         fig_cls = px.pie(
             names=["Pass (-1)", "Fail (1)"],
             values=[tgt["pass_count"], tgt["fail_count"]],
-            hole=0.52,
+            hole=0.56,
             color=["Pass (-1)", "Fail (1)"],
             color_discrete_map={"Pass (-1)": "#0284c7", "Fail (1)": "#dc2626"},
             title="Target Class Imbalance (1,567 Wafers)",
         )
-        fig_cls.update_traces(textinfo="label+value+percent")
-        fig_cls.update_layout(margin=dict(t=45, b=15, l=15, r=15), height=340)
+        fig_cls.update_traces(
+            textposition="outside",
+            texttemplate="%{label}<br>%{value:,} (%{percent})",
+            pull=[0.0, 0.05],
+            marker=dict(line=dict(color="#0f172a", width=2)),
+        )
+        style_plotly_figure(fig_cls, height=380, margin=dict(t=64, b=64, l=36, r=36))
+        fig_cls.update_layout(
+            legend=dict(orientation="h", yanchor="top", y=-0.08, xanchor="center", x=0.5),
+            annotations=[
+                dict(
+                    text=f"<b>{dim['sensor_rows']:,}</b><br>Wafers",
+                    x=0.5,
+                    y=0.5,
+                    font_size=14,
+                    showarrow=False,
+                )
+            ],
+        )
         st.plotly_chart(fig_cls, width="stretch")
 
     with col_right:
@@ -174,7 +270,7 @@ def render_eda(
 ) -> None:
     st.subheader("Section 2 — Exploratory Data Analysis & Statistical Audit")
 
-    col_a, col_b = st.columns(2)
+    col_a, col_b = st.columns(2, gap="large")
     with col_a:
         if audit_json and "chronological_timestamp_analysis" in audit_json:
             monthly_df = pd.DataFrame(audit_json["chronological_timestamp_analysis"]["monthly_fail_distribution"])
@@ -187,37 +283,68 @@ def render_eda(
                 title="Monthly Failure-Rate Trend (Jul–Oct 2008)",
                 labels={"year_month": "Production Month", "fail_rate_pct": "Fail Rate (%)"},
             )
-            fig_m.update_traces(line=dict(color="#dc2626", width=3), marker=dict(size=9), textposition="top center", texttemplate="%{text:.2f}%")
-            fig_m.update_layout(height=360, margin=dict(t=45, b=20, l=20, r=20), yaxis_range=[0, 27])
+            fig_m.update_traces(
+                line=dict(color="#ef4444", width=3),
+                marker=dict(size=10, line=dict(width=1.5, color="#ffffff")),
+                textposition="top center",
+                texttemplate="%{text:.2f}%",
+            )
+            style_plotly_figure(fig_m, height=520, margin=dict(t=62, b=65, l=24, r=24))
+            fig_m.update_xaxes(type="category", tickangle=0)
+            fig_m.update_yaxes(range=[0, 26.5], ticksuffix="%")
             st.plotly_chart(fig_m, width="stretch")
         else:
             st.warning("Monthly timestamp audit data unavailable.")
 
     with col_b:
         if missing_df is not None:
-            top_miss = missing_df.sort_values("missing_pct", ascending=False).head(20)
+            top_n_missing = 20
+            top_miss = missing_df.sort_values("missing_pct", ascending=False).head(top_n_missing)
             fig_miss = px.bar(
                 top_miss.iloc[::-1],
                 x="missing_pct",
                 y="feature",
                 orientation="h",
                 color="cleaning_action",
-                title="Top 20 Sensor Features by Missingness (%)",
-                labels={"missing_pct": "Missing (%)", "feature": "Sensor", "cleaning_action": "Phase 2 Action"},
+                color_discrete_map={
+                    "drop_gt_50pct_missing": "#ef4444",
+                    "keep_impute_median": "#38bdf8",
+                },
+                title=f"Top {len(top_miss)} Sensor Features by Missingness (%)",
+                labels={"missing_pct": "Missingness (%)", "feature": "Sensor Feature", "cleaning_action": "Phase 2 Action"},
             )
-            fig_miss.add_vline(x=50.0, line_dash="dash", line_color="#f59e0b", annotation_text="50% Cutoff")
-            fig_miss.update_layout(height=360, margin=dict(t=45, b=20, l=20, r=20), legend=dict(orientation="h", y=-0.22))
+            fig_miss.add_vline(
+                x=50.0,
+                line_dash="dash",
+                line_color="#f59e0b",
+                annotation_text="50% Cutoff",
+                annotation_position="top right",
+            )
+            style_plotly_figure(fig_miss, height=520, margin=dict(t=62, b=90, l=24, r=28))
+            fig_miss.update_yaxes(dtick=1, tickfont=dict(size=11))
+            fig_miss.update_xaxes(range=[0, 100], ticksuffix="%")
+            fig_miss.update_layout(
+                legend=dict(
+                    orientation="h",
+                    yanchor="top",
+                    y=-0.16,
+                    xanchor="center",
+                    x=0.5,
+                    title_text="",
+                )
+            )
             st.plotly_chart(fig_miss, width="stretch")
         else:
             st.warning("Missing-value report CSV unavailable.")
 
+    st.divider()
     st.markdown("#### Statistical Findings & Benjamini–Hochberg FDR Multiple-Testing Correction")
     if eda_json and stats_df is not None:
         m1, m2, m3, m4 = st.columns(4)
-        m1.metric("Sensors Tested (MW-U)", f"{len(stats_df)}")
-        m2.metric("Raw p < 0.05", f"{eda_json.get('raw_significant_0_05_count', 'N/A')}")
-        m3.metric("BH-FDR q < 0.05 (Imputed)", f"{eda_json.get('fdr_bh_significant_0_05_count', 'N/A')}")
-        m4.metric("Collinear Pairs (|r| >= 0.99)", f"{eda_json['correlation_summary']['pearson_pairs_abs_ge_0_99']}")
+        m1.metric("Sensors Tested (MW-U)", f"{len(stats_df):,}", "Cleaned active features", delta_color="off")
+        m2.metric("Raw p < 0.05", f"{eda_json.get('raw_significant_0_05_count', 'N/A')}", "Uncorrected Mann–Whitney U", delta_color="off")
+        m3.metric("BH-FDR q < 0.05 (Imputed)", f"{eda_json.get('fdr_bh_significant_0_05_count', 'N/A')}", "False-discovery adjusted", delta_color="off")
+        m4.metric("Collinear Pairs (|r| >= 0.99)", f"{eda_json['correlation_summary']['pearson_pairs_abs_ge_0_99']:,}", "Redundant sensor pairs", delta_color="off")
 
         top_fdr = stats_df.sort_values("mannwhitney_p_fdr_bh").head(15)[
             [
@@ -232,7 +359,22 @@ def render_eda(
                 "skewness",
             ]
         ]
-        st.dataframe(top_fdr, width="stretch", hide_index=True)
+        st.dataframe(
+            top_fdr,
+            width="stretch",
+            hide_index=True,
+            column_config={
+                "feature": st.column_config.TextColumn("Sensor"),
+                "pearson_r_with_fail": st.column_config.NumberColumn("Pearson r", format="%.4f"),
+                "spearman_rho_with_fail": st.column_config.NumberColumn("Spearman ρ", format="%.4f"),
+                "mannwhitney_p": st.column_config.NumberColumn("Raw p-value", format="%.2e"),
+                "mannwhitney_p_fdr_bh": st.column_config.NumberColumn("BH-FDR q-value", format="%.2e"),
+                "is_fdr_significant_0_05": st.column_config.CheckboxColumn("FDR q < 0.05"),
+                "pass_median": st.column_config.NumberColumn("Pass Median", format="%.4f"),
+                "fail_median": st.column_config.NumberColumn("Fail Median", format="%.4f"),
+                "skewness": st.column_config.NumberColumn("Skewness", format="%.2f"),
+            },
+        )
 
     st.markdown("#### Sensor Correlation Heatmap & Phase 2 Visualisations")
     fig_dir = REPORTS_DIR / "figures"
@@ -264,12 +406,12 @@ def render_model_comparison(
         return
 
     if test_metrics:
-        k1, k2, k3, k4, k5 = st.columns(5)
-        k1.metric("Selected Model", test_metrics["selected_model"])
-        k2.metric("Validation Threshold t*", f"{test_metrics['selected_threshold']:.2f}")
-        k3.metric("Held-Out Test PR-AUC", f"{test_metrics['pr_auc']:.4f}", "Base rate: 0.0613")
-        k4.metric("Held-Out Test ROC-AUC", f"{test_metrics['roc_auc']:.4f}")
-        k5.metric("Held-Out Fail Recall / F1", f"{test_metrics['fail_recall']:.4f}", f"F1: {test_metrics['fail_f1']:.4f}")
+        k1, k2, k3, k4, k5 = st.columns([1.45, 0.95, 1.0, 0.95, 1.05])
+        k1.metric("Selected Model", test_metrics["selected_model"], "Best Val PR-AUC (0.2080)", delta_color="off")
+        k2.metric("Validation Threshold (t*)", f"{test_metrics['selected_threshold']:.2f}", "Max Val F2 (0.3125)", delta_color="off")
+        k3.metric("Held-Out Test PR-AUC", f"{test_metrics['pr_auc']:.4f}", "Base rate: 0.0613", delta_color="off")
+        k4.metric("Held-Out Test ROC-AUC", f"{test_metrics['roc_auc']:.4f}", "October holdout (n=359)", delta_color="off")
+        k5.metric("Held-Out Fail Recall", f"{test_metrics['fail_recall']:.4f}", f"F1: {test_metrics['fail_f1']:.4f} (0/22 TP)", delta_color="off")
         st.info(
             "**Scientific Integrity Note:** `HistGradientBoosting` was selected solely on Validation PR-AUC (`0.2080`, `33.3%` recall at `t* = 0.19`). "
             "On the untouched October test set (`n=359`, `22` fails), ranking stayed above the `0.0613` base rate (`PR-AUC = 0.0828`, `ROC-AUC = 0.5968`), "
@@ -279,31 +421,87 @@ def render_model_comparison(
     tab_val, tab_test = st.tabs(["Chronological Validation Metrics (Sep 2008, n=483)", "Held-Out Test Metrics (Oct 2008, n=359)"])
     with tab_val:
         val_cols = ["model", "val_threshold", "val_pr_auc", "val_roc_auc", "val_precision", "val_recall", "val_f1", "val_f2", "val_accuracy"]
-        st.dataframe(comp_df[val_cols], width="stretch", hide_index=True)
+        st.dataframe(
+            comp_df[val_cols],
+            width="stretch",
+            hide_index=True,
+            column_config={
+                "model": st.column_config.TextColumn("Model"),
+                "val_threshold": st.column_config.NumberColumn("Threshold (t*)", format="%.2f"),
+                "val_pr_auc": st.column_config.NumberColumn("Val PR-AUC", format="%.4f"),
+                "val_roc_auc": st.column_config.NumberColumn("Val ROC-AUC", format="%.4f"),
+                "val_precision": st.column_config.NumberColumn("Val Precision", format="%.4f"),
+                "val_recall": st.column_config.NumberColumn("Val Recall", format="%.4f"),
+                "val_f1": st.column_config.NumberColumn("Val F1", format="%.4f"),
+                "val_f2": st.column_config.NumberColumn("Val F2", format="%.4f"),
+                "val_accuracy": st.column_config.NumberColumn("Val Accuracy", format="%.4f"),
+            },
+        )
 
     with tab_test:
         test_cols = ["model", "val_threshold", "test_pr_auc", "test_roc_auc", "test_precision", "test_recall", "test_f1", "test_f2", "test_accuracy", "test_tp", "test_fp", "test_fn", "test_tn"]
-        st.dataframe(comp_df[test_cols], width="stretch", hide_index=True)
+        st.dataframe(
+            comp_df[test_cols],
+            width="stretch",
+            hide_index=True,
+            column_config={
+                "model": st.column_config.TextColumn("Model"),
+                "val_threshold": st.column_config.NumberColumn("Threshold (t*)", format="%.2f"),
+                "test_pr_auc": st.column_config.NumberColumn("Test PR-AUC", format="%.4f"),
+                "test_roc_auc": st.column_config.NumberColumn("Test ROC-AUC", format="%.4f"),
+                "test_precision": st.column_config.NumberColumn("Test Precision", format="%.4f"),
+                "test_recall": st.column_config.NumberColumn("Test Recall", format="%.4f"),
+                "test_f1": st.column_config.NumberColumn("Test F1", format="%.4f"),
+                "test_f2": st.column_config.NumberColumn("Test F2", format="%.4f"),
+                "test_accuracy": st.column_config.NumberColumn("Test Accuracy", format="%.4f"),
+                "test_tp": st.column_config.NumberColumn("TP", format="%d"),
+                "test_fp": st.column_config.NumberColumn("FP", format="%d"),
+                "test_fn": st.column_config.NumberColumn("FN", format="%d"),
+                "test_tn": st.column_config.NumberColumn("TN", format="%d"),
+            },
+        )
 
+    metric_labels = {
+        "val_pr_auc": "Validation PR-AUC",
+        "test_pr_auc": "Held-Out Test PR-AUC",
+        "val_f2": "Validation F2",
+        "test_f2": "Held-Out Test F2",
+    }
     melt_df = comp_df.melt(
         id_vars="model",
         value_vars=["val_pr_auc", "test_pr_auc", "val_f2", "test_f2"],
         var_name="Metric",
         value_name="Score",
     )
+    melt_df["Metric"] = melt_df["Metric"].map(metric_labels)
     fig_comp = px.bar(
         melt_df,
         x="model",
         y="Score",
         color="Metric",
         barmode="group",
+        text_auto=".3f",
+        color_discrete_map={
+            "Validation PR-AUC": "#38bdf8",
+            "Held-Out Test PR-AUC": "#0284c7",
+            "Validation F2": "#f59e0b",
+            "Held-Out Test F2": "#ef4444",
+        },
         title="Validation vs. Held-Out Test PR-AUC & F2 Comparison",
+        labels={"model": "Model Architecture", "Score": "Score"},
     )
-    fig_comp.update_layout(height=370, margin=dict(t=45, b=20, l=20, r=20))
+    fig_comp.update_traces(textposition="outside", cliponaxis=False)
+    style_plotly_figure(fig_comp, height=430, margin=dict(t=64, b=82, l=28, r=24))
+    max_comp_score = float(melt_df["Score"].max()) if not melt_df.empty else 0.4
+    fig_comp.update_yaxes(range=[0, max(0.38, max_comp_score * 1.18)])
+    fig_comp.update_layout(
+        legend=dict(orientation="h", yanchor="top", y=-0.16, xanchor="center", x=0.5, title_text="")
+    )
     st.plotly_chart(fig_comp, width="stretch")
 
+    st.divider()
     p3_dir = REPORTS_DIR / "phase3"
-    c1, c2, c3 = st.columns(3)
+    c1, c2, c3 = st.columns(3, gap="medium")
     with c1:
         show_image_safe(p3_dir / "confusion_matrix.png", "Validation & Test Confusion Matrices")
     with c2:
@@ -367,10 +565,10 @@ def render_interactive_prediction(model: object | None, model_meta: dict | None,
         mean_prob = float(pred_df["fail_probability"].mean())
 
         m1, m2, m3, m4 = st.columns(4)
-        m1.metric("Records Scored", f"{n_total}")
-        m2.metric("Flagged High Risk (Fail=1)", f"{n_flagged}", f"{n_flagged/n_total*100:.1f}%")
-        m3.metric("Max Failure Probability", f"{max_prob:.4f}")
-        m4.metric("Mean Failure Probability", f"{mean_prob:.4f}")
+        m1.metric("Records Scored", f"{n_total:,}", "Validated wafer rows", delta_color="off")
+        m2.metric("Flagged High Risk (Fail=1)", f"{n_flagged:,}", f"{n_flagged / n_total * 100:.1f}% of batch (t* >= {threshold:.2f})", delta_color="off")
+        m3.metric("Max Failure Probability", f"{max_prob:.4f}", "Highest predicted risk score", delta_color="off")
+        m4.metric("Mean Failure Probability", f"{mean_prob:.4f}", "Average batch risk score", delta_color="off")
 
         fig_p = px.histogram(
             pred_df,
@@ -381,11 +579,30 @@ def render_interactive_prediction(model: object | None, model_meta: dict | None,
             labels={"fail_probability": "Predicted P(Fail)", "predicted_outcome": "Classification"},
             color_discrete_map={"Pass (-1)": "#0284c7", "Fail (1)": "#dc2626"},
         )
-        fig_p.add_vline(x=threshold, line_dash="dash", line_color="#f59e0b", annotation_text=f"t* = {threshold:.2f}")
-        fig_p.update_layout(height=320, margin=dict(t=45, b=20, l=20, r=20))
+        fig_p.add_vline(
+            x=threshold,
+            line_dash="dash",
+            line_color="#f59e0b",
+            annotation_text=f"t* = {threshold:.2f}",
+            annotation_position="top right",
+        )
+        style_plotly_figure(fig_p, height=370, margin=dict(t=62, b=72, l=28, r=28))
+        fig_p.update_xaxes(range=[0.0, max(0.30, min(1.0, max_prob * 1.15))])
+        fig_p.update_yaxes(title_text="Wafer Count", dtick=1)
+        fig_p.update_layout(
+            bargap=0.08,
+            legend=dict(orientation="h", yanchor="top", y=-0.18, xanchor="center", x=0.5, title_text=""),
+        )
         st.plotly_chart(fig_p, width="stretch")
 
-        st.dataframe(pred_df, width="stretch", hide_index=True)
+        st.dataframe(
+            pred_df,
+            width="stretch",
+            hide_index=True,
+            column_config={
+                "fail_probability": st.column_config.NumberColumn("Predicted P(Fail)", format="%.4f"),
+            },
+        )
         st.download_button(
             label="Download Predictions CSV",
             data=pred_df.to_csv(index=False).encode("utf-8"),
@@ -408,11 +625,12 @@ def render_explainability_and_findings(imp_df: pd.DataFrame | None, audit_json: 
             orientation="h",
             color="rf_importance",
             color_continuous_scale="Teal",
-            title="Top 15 Predictive Anonymous Sensors (Combined LogReg + RandomForest Rank)",
+            title=f"Top {len(top15)} Predictive Anonymous Sensors (LogReg + RF Combined Rank)",
             labels={"combined_score": "Normalized Combined Importance", "feature": "Anonymous Sensor", "rf_importance": "RF Importance"},
         )
-        fig_imp.update_layout(height=430, margin=dict(t=45, b=20, l=20, r=20))
-        c1, c2 = st.columns([1.15, 1.0])
+        style_plotly_figure(fig_imp, height=480, margin=dict(t=62, b=52, l=24, r=32))
+        fig_imp.update_yaxes(dtick=1, tickfont=dict(size=11))
+        c1, c2 = st.columns([1.0, 1.05], gap="medium")
         with c1:
             st.plotly_chart(fig_imp, width="stretch")
         with c2:
@@ -420,8 +638,17 @@ def render_explainability_and_findings(imp_df: pd.DataFrame | None, audit_json: 
                 top15[["combined_rank", "feature", "lr_coef_signed", "rf_importance", "lr_rank", "rf_rank"]],
                 width="stretch",
                 hide_index=True,
-                height=430,
+                height=480,
+                column_config={
+                    "combined_rank": st.column_config.NumberColumn("Rank", format="%d", width="small"),
+                    "feature": st.column_config.TextColumn("Sensor", width="small"),
+                    "lr_coef_signed": st.column_config.NumberColumn("LR Coef", format="%.4f", width="small"),
+                    "rf_importance": st.column_config.NumberColumn("RF Imp.", format="%.4f", width="small"),
+                    "lr_rank": st.column_config.NumberColumn("LR #", format="%d", width="small"),
+                    "rf_rank": st.column_config.NumberColumn("RF #", format="%d", width="small"),
+                },
             )
+        st.divider()
         show_image_safe(REPORTS_DIR / "phase3" / "feature_importance.png", "LogisticRegression Coefficients vs. RandomForest Importance")
     else:
         st.warning("Feature importance CSV (`reports/phase3/feature_importance.csv`) not found.")
@@ -431,7 +658,7 @@ def render_explainability_and_findings(imp_df: pd.DataFrame | None, audit_json: 
         "Feature rankings indicate statistical predictive associations, **not** physical root causes."
     )
 
-    col_lim, col_rec = st.columns(2)
+    col_lim, col_rec = st.columns(2, gap="large")
     with col_lim:
         st.markdown(
             "#### Temporal Distribution Shift & Limitations\n"
