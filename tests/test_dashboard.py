@@ -67,11 +67,11 @@ def test_streamlit_all_five_sections_render_without_exceptions() -> None:
     assert not at.exception, f"Section 1 exception: {at.exception}"
 
     sections = [
-        "1. Project Overview",
-        "2. Exploratory Data Analysis",
-        "3. Predictive Model Comparison",
-        "4. Interactive Prediction",
-        "5. Explainability & Findings",
+        "Overview",
+        "Data Analysis",
+        "Model Performance",
+        "Quality Prediction",
+        "Explainability & Insights",
     ]
     for sec in sections:
         at.sidebar.radio[0].set_value(sec).run()
